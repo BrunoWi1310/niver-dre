@@ -379,21 +379,33 @@
   }
 
   /* ---------------- Música ---------------- */
+  /* Celulares não deixam tocar som antes de um toque na tela.
+     Por isso a música começa junto com o botão "Começar a caçada".
+     Se ela pausar pelo botão, a escolha fica salva. */
   var audio = $('#audio'), btnMusica = $('#btn-musica');
+  var CHAVE_MUSICA = 'cacaTesouro:musicaDesligada';
+  function musicaDesligada() {
+    try { return localStorage.getItem(CHAVE_MUSICA) === '1'; } catch (e) { return false; }
+  }
+  function lembrarMusica(desligada) {
+    try { localStorage.setItem(CHAVE_MUSICA, desligada ? '1' : '0'); } catch (e) { }
+  }
+  function tocarMusica(avisarErro) {
+    if (!DADOS.musica) return;
+    if (!audio.src) audio.src = DADOS.musica;
+    audio.volume = 0.6;
+    audio.play().then(function () {
+      btnMusica.classList.add('tocando');
+      btnMusica.setAttribute('aria-label', 'Pausar música');
+    }).catch(function () {
+      if (avisarErro && audio.error) aviso('Não achei a música (' + DADOS.musica + ')');
+    });
+  }
   if (DADOS.musica) {
     btnMusica.hidden = false;
     btnMusica.addEventListener('click', function () {
-      if (!audio.src) audio.src = DADOS.musica;
-      if (audio.paused) {
-        audio.play().then(function () {
-          btnMusica.classList.add('tocando');
-          btnMusica.setAttribute('aria-label', 'Pausar música');
-        }).catch(function () {
-          if (audio.error) aviso('Não achei a música (' + DADOS.musica + ')');
-        });
-      } else {
-        audio.pause();
-      }
+      if (audio.paused) { lembrarMusica(false); tocarMusica(true); }
+      else { lembrarMusica(true); audio.pause(); }
     });
     audio.addEventListener('pause', function () {
       btnMusica.classList.remove('tocando');
@@ -413,6 +425,7 @@
 
   /* ---------------- Começo ---------------- */
   $('#btn-comecar').addEventListener('click', function () {
+    if (audio.paused && !musicaDesligada()) tocarMusica(false);
     estado.comecou = true;
     salvar();
     seguir();
