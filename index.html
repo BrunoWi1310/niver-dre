@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#f8efe4">
+  <title>Caça ao tesouro</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%236e1f33' d='M16 28s-11-6.6-11-14.2C5 9.4 8 6.5 11.5 6.5c2 0 3.6 1 4.5 2.6.9-1.6 2.5-2.6 4.5-2.6C24 6.5 27 9.4 27 13.8 27 21.4 16 28 16 28z'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+
+  <!-- Topo: progresso + atalhos -->
+  <header class="topo" id="topo" hidden>
+    <div class="coracoes" id="coracoes" aria-label="Progresso"></div>
+    <div class="topo-acoes">
+      <button class="icone-btn" id="btn-musica" aria-label="Tocar música" hidden>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 17.5V6.2l10-2.2v11.3"/><circle cx="6.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="15.3" r="2.5"/></svg>
+      </button>
+      <button class="icone-btn" id="btn-tesouros" aria-label="Meus tesouros">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 10h17v9.5a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1z"/><path d="M3.5 10a8.5 5.5 0 0 1 17 0"/><path d="M3.5 13.5h17"/><rect x="10.3" y="12" width="3.4" height="4" rx=".8"/></svg>
+        <span class="contador" id="contador-tesouros">0</span>
+      </button>
+    </div>
+  </header>
+
+  <main id="palco">
+
+    <!-- ============ TELA INICIAL ============ -->
+    <section class="tela" id="tela-inicio">
+      <div class="inicio">
+        <p class="manuscrita sobretitulo" id="inicio-sobretitulo"></p>
+        <h1 class="titulo-grande" id="inicio-titulo"></h1>
+        <div class="selo" aria-hidden="true">
+          <svg viewBox="0 0 100 100">
+            <path class="selo-borda" d="M50 4c6 0 8 5 13 6s10-3 14 1 1 10 4 14 9 5 9 11-5 8-6 13 3 10-1 14-10 1-14 4-5 9-11 9-8-5-13-6-10 3-14-1-1-10-4-14-9-5-9-11 5-8 6-13-3-10 1-14 10-1 14-4 5-9 11-9z"/>
+            <path class="selo-coracao" d="M50 70S31 59 31 46.5C31 39.5 36 35 41.5 35c3.6 0 6.7 2 8.5 5 1.8-3 4.9-5 8.5-5C64 35 69 39.5 69 46.5 69 59 50 70 50 70z"/>
+          </svg>
+        </div>
+        <p class="texto-inicio" id="inicio-texto"></p>
+        <p class="progresso-salvo" id="inicio-progresso" hidden></p>
+        <button class="btn btn-principal" id="btn-comecar"></button>
+        <button class="btn-link" id="btn-inicio-tesouros" hidden>Ver meus tesouros</button>
+      </div>
+    </section>
+
+    <!-- ============ PERGUNTA ============ -->
+    <section class="tela" id="tela-pergunta">
+      <article class="cartao-enigma">
+        <p class="manuscrita numero-enigma" id="numero-enigma"></p>
+        <h2 class="texto-enigma" id="texto-enigma"></h2>
+        <form id="form-resposta" autocomplete="off" novalidate>
+          <label class="sr-only" for="campo-resposta">Sua resposta</label>
+          <input id="campo-resposta" class="campo" type="text" placeholder="escreva aqui…"
+                 autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="send">
+          <button type="submit" class="btn btn-principal">Responder</button>
+        </form>
+        <p class="feedback" id="feedback" role="status" aria-live="polite"></p>
+        <button class="btn-link" id="btn-dica" type="button">Pedir dica</button>
+        <div class="bilhete-dica" id="dica" hidden>
+          <span class="manuscrita">psiu…</span>
+          <p id="texto-dica"></p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ============ RECOMPENSA ============ -->
+    <section class="tela" id="tela-recompensa">
+      <p class="manuscrita sobretitulo centro">tesouro encontrado!</p>
+      <div id="area-recompensa"></div>
+      <div class="centro acoes-recompensa">
+        <button class="btn btn-principal" id="btn-proxima"></button>
+      </div>
+    </section>
+
+    <!-- ============ MEUS TESOUROS ============ -->
+    <section class="tela" id="tela-tesouros">
+      <div class="cabecalho-tela">
+        <button class="btn-voltar" id="btn-voltar" aria-label="Voltar">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+        </button>
+        <h2 class="titulo-medio">Meus tesouros</h2>
+      </div>
+      <p class="subtexto centro" id="resumo-tesouros"></p>
+      <div class="grade-tesouros" id="grade-tesouros"></div>
+      <div class="centro">
+        <button class="btn-link discreto" id="btn-recomecar">recomeçar a caçada do zero</button>
+      </div>
+    </section>
+
+    <!-- ============ FINAL ============ -->
+    <section class="tela" id="tela-final">
+      <div class="final">
+        <div class="conquista" id="conquista">
+          <div class="conquista-icone" aria-hidden="true">🏆</div>
+          <div>
+            <p class="conquista-rotulo">Conquista desbloqueada</p>
+            <p class="conquista-nome" id="conquista-nome"></p>
+          </div>
+        </div>
+        <h1 class="titulo-grande" id="final-titulo"></h1>
+        <div class="papel final-papel">
+          <p class="manuscrita texto-carta" id="final-mensagem"></p>
+          <p class="manuscrita assinatura" id="final-assinatura"></p>
+        </div>
+        <button class="btn btn-principal" id="btn-final-tesouros">Rever meus tesouros</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Janela para rever um tesouro -->
+  <div class="modal" id="modal" hidden>
+    <div class="modal-fundo" data-fechar></div>
+    <div class="modal-caixa" role="dialog" aria-modal="true">
+      <button class="modal-fechar" data-fechar aria-label="Fechar">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <div id="modal-conteudo"></div>
+    </div>
+  </div>
+
+  <div class="festa" id="festa" aria-hidden="true"></div>
+  <div class="aviso" id="aviso" role="status"></div>
+  <audio id="audio" loop preload="none"></audio>
+
+  <script src="dados.js"></script>
+  <script src="js/cripto.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
