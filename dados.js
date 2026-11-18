@@ -1,4 +1,4 @@
-/* ==========================================================
+ /* ==========================================================
    dados.js — TODO o conteúdo da caçada fica aqui.
    Edite à vontade; o resto do código lê deste arquivo.
 
@@ -72,17 +72,19 @@ Sem pressa: dá pra parar e voltar quando quiser.`,
     {
       pergunta: "Qual a data que começamos a namorar?",
       respostas: [
-  "d28bd9d6d23a67ed92d6d772fed6557e388cafbf83c374c390840e3a40ffe816"
+  "d28bd9d6d23a67ed92d6d772fed6557e388cafbf83c374c390840e3a40ffe816",
+  "0d86dab6bfceb0e7f132ab82ffac603d7fb689cfcda9d25feef6e3c347d0f2cc",
+  "92b8642aceed8fbf51a4be2f30c16bd20fb21a6c53f054ed6ae3f252e0f96808"
 ],
       dica: "Aniversário do seu BESTIE MODA",
       recompensa: {
         tipo: "carta",
         titulo: "Meu amor,",
-        texto: `Lembro direitinho daquele mês. Eu estava nervoso, você estava rindo de mim, e eu soube ali que queria ouvir essa risada pelo resto da vida.
+        texto: `Lembro direitinho daquele mês. Você tinha me dado um pacote de Amandita, me desesperei tanto com o gesto que tive que oficializar na hora, foi meio ruim, mas foi com a maior sinceridade do mundo. Quem sabe eu possa ter a chance de fazer um pedido melhor em breve?
 
 Obrigado por cada dia desde então. Pelos dias fáceis e pelos difíceis também.
 
-Esse é só o primeiro de muitos aniversários que eu quero comemorar do seu lado.`,
+Esse é só mais um aniversário que eu quero comemorar do seu lado.`,
         assinatura: "Com todo o meu amor, eu"
       }
     },
@@ -181,7 +183,7 @@ Esse é só o primeiro de muitos aniversários que eu quero comemorar do seu lad
     titulo: "Você encontrou todos os tesouros",
     mensagem: `Mas o maior tesouro dessa história é você.
 
-Feliz aniversário. Obrigado por existir e por me escolher todos os dias.
+Feliz aniversário. Obrigado por existir e fazer parte da minha vida e da minha história. Que isso continue por toda eternidade.
 Te amo mais do que cabe nesse site.`,
     assinatura: "Seu, para sempre",
     conquista: "Amor da minha vida"
